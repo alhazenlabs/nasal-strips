@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breathing Nasal Strips | Alhazen Labs</title>
+    <link rel="icon" type="image/png" href="assets/icon.png">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            --primary: #1E3A8A;
+            --primary-light: #3B82F6;
+            --accent: #00f2fe;
+            --success: #10B981;
+            --bg-light: #f8fafc;
+            --text-dark: #1e293b;
+            --text-muted: #64748b;
+            --white: #ffffff;
+            --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--white);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-logo {
+            height: 40px;
+        }
+
+        .back-link {
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 500;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: color 0.3s;
+        }
+
+        .back-link:hover {
+            color: var(--primary-light);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #f0f7ff 0%, #ffffff 100%);
+            padding: 4rem 5%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            line-height: 1.1;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .price-badge {
+            background: rgba(0, 242, 254, 0.1);
+            color: var(--primary);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+        }
+
+        .product-image {
+            position: relative;
+        }
+
+        .product-image img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        /* CTA Button */
+        .cta-btn {
+            background: var(--success);
+            color: var(--white);
+            text-decoration: none;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            box-shadow: 0 10px 20px rgba(16, 185, 129, 0.2);
+            transition: all 0.3s;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(16, 185, 129, 0.3);
+            background: #0ea672;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 5rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin-bottom: 3rem;
+            font-weight: 600;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        /* Usage Section */
+        .usage {
+            background: var(--primary);
+            color: var(--white);
+            padding: 5rem 5%;
+        }
+
+        .usage-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .usage-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .usage-item h4 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        /* Disclaimer */
+        .disclaimer {
+            padding: 3rem 5%;
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        footer {
+            background: #0a192f;
+            color: rgba(255, 255, 255, 0.8);
+            padding: 4rem 5%;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .footer-brand {
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .footer-info {
+            font-size: 0.9rem;
+            line-height: 2;
+        }
+
+        @media (max-width: 900px) {
+            .hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+                padding-top: 2rem;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .cta-btn {
+                justify-content: center;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <a href="index.html" class="nav-logo-link">
+            <img src="assets/logo.png" alt="Alhazen Labs" class="nav-logo">
+        </a>
+        <a href="index.html" class="back-link">
+            ← Home
+        </a>
+    </nav>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <span class="price-badge">Premium Care | 30 Strips</span>
+                <h1>Open Your World to Better Breathing</h1>
+                <p>Alhazen Labs Nasal Strips provide gentle, mechanical support to open your nasal passages, helping you
+                    breathe more clearly every single day.</p>
+                <div style="font-size: 1.5rem; font-weight: 700; margin-bottom: 2rem; color: var(--primary);">₹299 <span
+                        style="font-size: 0.9rem; font-weight: 400; color: var(--text-muted);">MRP (Incl. All
+                        Taxes)</span></div>
+                <a href="https://wa.me/919876543210?text=Hi, I want to order Alhazen Nose Strips" class="cta-btn">
+                    Order via WhatsApp
+                </a>
+            </div>
+            <div class="product-image">
+                <img src="https://via.placeholder.com/600x700/DEB887/1E3A8A?text=Alhazen+Premium+Pack"
+                    alt="Alhazen Nasal Strips">
+            </div>
+        </section>
+
+        <section class="features">
+            <h2 class="section-title">Why Choose Alhazen?</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <span class="feature-icon">✨</span>
+                    <h3>Perfect Tension</h3>
+                    <p>Designed with balanced firmness to open nasal passages without unnecessary pressure.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">🌙</span>
+                    <h3>Secure 12h Grip</h3>
+                    <p>Premium medical-grade adhesive that stays secure through sleep or intense physical activity.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">🌿</span>
+                    <h3>Eco-Conscious</h3>
+                    <p>Packaged in sustainable kraft material with a resealable zipper for on-the-go convenience.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="usage">
+            <div class="usage-container">
+                <h2 class="section-title" style="color: white; margin-bottom: 1rem;">Engineered for Performance</h2>
+                <p style="text-align: center; opacity: 0.8; margin-bottom: 4rem;">One strip, multiple possibilities.</p>
+                <div class="usage-grid">
+                    <div class="usage-item">
+                        <h4>Deep Sleep</h4>
+                        <p>Reduces nasal resistance to support quiet, unobstructed breathing throughout the night.</p>
+                    </div>
+                    <div class="usage-item">
+                        <h4>Peak Performance</h4>
+                        <p>Perfect for athletes looking to improve nasal airflow during workouts and endurance runs.</p>
+                    </div>
+                    <div class="usage-item">
+                        <h4>Everyday Relief</h4>
+                        <p>Lightweight and comfortable enough for all-day wear during travel or work.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="disclaimer">
+            <p><strong>Medical Disclaimer:</strong> This product provides mechanical support only and is not intended to
+                diagnose, treat, cure, or prevent any medical condition. For external use only. If you have chronic
+                breathing issues, please consult your healthcare provider.</p>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <img src="assets/logo.png" alt="Alhazen Labs" style="height: 40px; filter: brightness(0) invert(1);">
+            </div>
+            <div class="footer-info">
+                Imported & Marketed by: <strong>Kashif Bilal Ali, Prop. Alhazen Labs</strong><br>
+                Bengaluru, Karnataka | GSTIN: 29CEIRPXXXXX1Z5<br>
+                <a href="mailto:hello@alhazenlabs.com"
+                    style="color: var(--accent); text-decoration: none;">hello@alhazenlabs.com</a>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
