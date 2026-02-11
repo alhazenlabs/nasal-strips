@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alhazen Labs | Innovation in Health & Wellness</title>
+    <title>Alhazen Labs</title>
     <link rel="icon" type="image/png" href="assets/icon.png">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap');
@@ -48,14 +48,17 @@
         }
 
         .logo {
-            width: 320px;
-            max-width: 80vw;
-            filter: drop-shadow(0 0 20px rgba(0, 242, 254, 0.3));
-            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            width: 300px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 50%;
+            filter: drop-shadow(0 0 30px rgba(0, 242, 254, 0.4));
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .logo:hover {
             transform: scale(1.05);
+            box-shadow: 0 0 50px rgba(0, 242, 254, 0.3);
         }
 
         h1 {
@@ -101,6 +104,34 @@
             transform: translateY(-2px);
         }
 
+        .social-links {
+            position: absolute;
+            bottom: 5rem;
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            animation: fadeIn 2s ease-out;
+        }
+
+        .social-link {
+            color: var(--text-dim);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            opacity: 0.6;
+        }
+
+        .social-link svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .social-link:hover {
+            color: var(--brand-cyan);
+            opacity: 1;
+            transform: translateY(-2px);
+        }
+
         .enter-link:hover::before {
             left: 100%;
         }
@@ -125,6 +156,99 @@
             }
         }
 
+        /* Slider & Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 15, 30, 0.8);
+            backdrop-filter: blur(15px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .slider-container {
+            width: 90%;
+            max-width: 1000px;
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            transform: scale(0.9) translateY(30px);
+            transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        .modal-overlay.active .slider-container {
+            transform: scale(1) translateY(0);
+        }
+
+        .product-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 2.5rem;
+            width: 320px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .product-card:hover {
+            background: rgba(255, 255, 255, 0.07);
+            border-color: var(--brand-cyan);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(0, 242, 254, 0.1);
+        }
+
+        .product-card img {
+            width: 180px;
+            height: 180px;
+            object-fit: contain;
+            border-radius: 16px;
+            margin-bottom: 2rem;
+            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
+        }
+
+        .product-card h3 {
+            color: var(--text-main);
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-card p {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .close-hint {
+            position: absolute;
+            bottom: 3rem;
+            color: var(--text-dim);
+            font-size: 0.8rem;
+            letter-spacing: 0.2rem;
+            text-transform: uppercase;
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
         @media (max-width: 600px) {
             h1 {
                 font-size: 1rem;
@@ -132,7 +256,23 @@
             }
 
             .logo {
-                width: 260px;
+                width: 220px;
+                height: 220px;
+            }
+
+            .slider-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .product-card {
+                width: 280px;
+                padding: 1.5rem;
+            }
+
+            .product-card img {
+                width: 140px;
+                height: 140px;
             }
         }
     </style>
@@ -143,13 +283,69 @@
         <div class="logo-container">
             <img src="assets/logo.png" alt="Alhazen Labs" class="logo">
         </div>
-        <h1>Innovation in Health</h1>
-        <a href="strips.html" class="enter-link">Our Products</a>
+        <h1>Innovative products for better living</h1>
+        <a href="javascript:void(0)" class="enter-link" id="open-slider">Our Products</a>
+    </div>
+
+    <!-- Product Selection Slider Modal -->
+    <div class="modal-overlay" id="product-modal">
+        <div class="slider-container">
+            <!-- Nasal Strips Product Card -->
+            <div class="product-card" onclick="window.location.href='strips.html'">
+                <img src="assets/strips_thumb.jpg" alt="Nasal Strips">
+                <h3>Nasal Strips</h3>
+                <p>Breathe clearly, sleep better, and perform at your peak with mechanical nasal support.</p>
+            </div>
+
+        </div>
+        <div class="close-hint">Click anywhere to close</div>
+    </div>
+
+    <div class="social-links">
+        <a href="https://instagram.com/alhazenlabs" target="_blank" class="social-link" title="Instagram">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+            </svg>
+        </a>
+        <a href="mailto:hello@alhazenlabs.com" class="social-link" title="Email">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect width="20" height="16" x="2" y="4" rx="2" />
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+            </svg>
+        </a>
     </div>
 
     <div class="footer">
         &copy; 2026 ALHAZEN LABS. ALL RIGHTS RESERVED.
     </div>
+
+    <script>
+        const openBtn = document.getElementById('open-slider');
+        const modal = document.getElementById('product-modal');
+
+        openBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            modal.classList.add('active');
+        });
+
+        modal.addEventListener('click', (e) => {
+            // If the user clicks strictly on the modal-overlay (not the cards)
+            if (e.target === modal) {
+                modal.classList.remove('active');
+            }
+        });
+
+        // Prevent clicking inside cards from closing the modal (though window.location handles navigation)
+        document.querySelectorAll('.product-card').forEach(card => {
+            card.addEventListener('click', (e) => {
+                e.stopPropagation();
+            });
+        });
+    </script>
 </body>
 
 </html>
