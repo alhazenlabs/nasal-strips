@@ -21,22 +21,27 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
             font-family: 'Outfit', sans-serif;
             background-color: var(--bg-deep);
             color: var(--text-main);
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
-            overflow: hidden;
+            overflow-x: hidden;
             background-image: radial-gradient(circle at 50% 50%, rgba(79, 172, 254, 0.1) 0%, transparent 70%);
         }
 
         .container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
             padding: 2rem;
             animation: fadeIn 1.5s ease-out;
@@ -45,6 +50,16 @@
         .logo-container {
             margin-bottom: 2rem;
             position: relative;
+            perspective: 1000px;
+            /* Enable 3D space */
+        }
+
+        .logo-wrapper {
+            transition: transform 0.1s ease-out;
+            transform-style: preserve-3d;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .logo {
@@ -53,12 +68,18 @@
             object-fit: cover;
             border-radius: 50%;
             filter: drop-shadow(0 0 30px rgba(0, 242, 254, 0.4));
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .logo:hover {
             transform: scale(1.05);
             box-shadow: 0 0 50px rgba(0, 242, 254, 0.3);
+        }
+
+        .logo:active {
+            transform: scale(0.98);
+            box-shadow: 0 0 20px rgba(0, 242, 254, 0.2);
+            transition: transform 0.1s ease;
         }
 
         h1 {
@@ -104,12 +125,17 @@
             transform: translateY(-2px);
         }
 
+        .enter-link:active {
+            transform: translateY(0) scale(0.98);
+            background: rgba(0, 242, 254, 0.2);
+        }
+
         .social-links {
-            position: absolute;
-            bottom: 5rem;
             display: flex;
             gap: 1.5rem;
             justify-content: center;
+            margin-top: 3rem;
+            /* Spacing below 'Our Products' */
             animation: fadeIn 2s ease-out;
         }
 
@@ -132,16 +158,22 @@
             transform: translateY(-2px);
         }
 
+        .social-link:active {
+            transform: scale(0.9);
+            transition: transform 0.1s ease;
+        }
+
         .enter-link:hover::before {
             left: 100%;
         }
 
         .footer {
-            position: absolute;
-            bottom: 2rem;
+            padding-bottom: 2rem;
             font-size: 0.8rem;
             color: var(--text-dim);
             letter-spacing: 0.1rem;
+            text-align: center;
+            width: 100%;
         }
 
         @keyframes fadeIn {
@@ -281,10 +313,30 @@
 <body>
     <div class="container">
         <div class="logo-container">
-            <img src="assets/logo.png" alt="Alhazen Labs" class="logo">
+            <div class="logo-wrapper" id="logo-wrapper">
+                <img src="assets/logo.png" alt="Alhazen Labs" class="logo" id="main-logo">
+            </div>
         </div>
         <h1>Innovative products for better living</h1>
         <a href="javascript:void(0)" class="enter-link" id="open-slider">Our Products</a>
+
+        <div class="social-links">
+            <a href="https://instagram.com/alhazenlabs" target="_blank" class="social-link" title="Instagram">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                    <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+                </svg>
+            </a>
+            <a href="mailto:hello@alhazenlabs.com" class="social-link" title="Email">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect width="20" height="16" x="2" y="4" rx="2" />
+                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                </svg>
+            </a>
+        </div>
     </div>
 
     <!-- Product Selection Slider Modal -->
@@ -294,30 +346,21 @@
             <div class="product-card" onclick="window.location.href='strips.html'">
                 <img src="assets/strips_thumb.jpg" alt="Nasal Strips">
                 <h3>Nasal Strips</h3>
-                <p>Breathe clearly, sleep better, and perform at your peak with mechanical nasal support.</p>
+                <p>Unlock your true potential with every breath.</p>
             </div>
 
+            <!-- Lullaby Product Card (Coming Soon) -->
+            <div class="product-card" style="opacity: 0.5; cursor: default;">
+                <div
+                    style="width:180px; height:180px; background: rgba(255,255,255,0.05); border-radius: 16px; margin-bottom: 2rem; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; color: var(--text-dim);">
+                    Coming Soon</div>
+                <h3>Lullaby</h3>
+                <p>Coming soon</p>
+            </div>
         </div>
         <div class="close-hint">Click anywhere to close</div>
     </div>
 
-    <div class="social-links">
-        <a href="https://instagram.com/alhazenlabs" target="_blank" class="social-link" title="Instagram">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
-                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-                <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
-            </svg>
-        </a>
-        <a href="mailto:hello@alhazenlabs.com" class="social-link" title="Email">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect width="20" height="16" x="2" y="4" rx="2" />
-                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
-            </svg>
-        </a>
-    </div>
 
     <div class="footer">
         &copy; 2026 ALHAZEN LABS. ALL RIGHTS RESERVED.
@@ -326,20 +369,81 @@
     <script>
         const openBtn = document.getElementById('open-slider');
         const modal = document.getElementById('product-modal');
+        const logoWrapper = document.getElementById('logo-wrapper');
+        const mainLogo = document.getElementById('main-logo');
 
+        // --- Logo Motion Logic ---
+        let isHoveringLogo = false;
+        let hasOrientationData = false;
+
+        mainLogo.addEventListener('mouseenter', () => {
+            isHoveringLogo = true;
+            logoWrapper.style.transform = 'rotateX(0deg) rotateY(0deg)';
+        });
+
+        mainLogo.addEventListener('mouseleave', () => {
+            isHoveringLogo = false;
+        });
+
+        // Unified Transform Function
+        function updateLogoTransform(rotX, rotY) {
+            if (isHoveringLogo) return;
+            logoWrapper.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg)`;
+        }
+
+        // PC: Mouse Tracking
+        document.addEventListener('mousemove', (e) => {
+            // Only use mouse if we haven't received significant orientation data recently
+            if (window.innerWidth > 768 && !hasOrientationData) {
+                const xAxis = (window.innerWidth / 2 - e.pageX) / 40;
+                const yAxis = (window.innerHeight / 2 - e.pageY) / 40;
+                updateLogoTransform(yAxis, xAxis);
+            }
+        });
+
+        // Mobile/Sensors: Device Orientation
+        function handleOrientation(event) {
+            if (event.gamma !== null) {
+                hasOrientationData = true;
+                const gamma = event.gamma;
+                const rotY = Math.max(-15, Math.min(15, gamma)) * 0.4;
+                updateLogoTransform(0, rotY);
+            }
+        }
+
+        // Request permission for iOS 13+
+        function requestOrientationPermission() {
+            if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+                DeviceOrientationEvent.requestPermission()
+                    .then(permissionState => {
+                        if (permissionState === 'granted') {
+                            window.addEventListener('deviceorientation', handleOrientation);
+                        }
+                    })
+                    .catch(console.error);
+            } else {
+                // Non-iOS devices
+                window.addEventListener('deviceorientation', handleOrientation);
+            }
+        }
+
+        // Initialize orientation tracking on first interaction if needed
+        document.body.addEventListener('click', () => {
+            requestOrientationPermission();
+        }, { once: true });
+
+        // --- Slider Logic ---
         openBtn.addEventListener('click', (e) => {
             e.preventDefault();
             modal.classList.add('active');
         });
 
         modal.addEventListener('click', (e) => {
-            // If the user clicks strictly on the modal-overlay (not the cards)
             if (e.target === modal) {
                 modal.classList.remove('active');
             }
         });
 
-        // Prevent clicking inside cards from closing the modal (though window.location handles navigation)
         document.querySelectorAll('.product-card').forEach(card => {
             card.addEventListener('click', (e) => {
                 e.stopPropagation();
