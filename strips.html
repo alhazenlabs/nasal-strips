@@ -4,253 +4,341 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Breathing Nasal Strips | Alhazen Labs</title>
+    <title>Nasal Strips | Alhazen Labs</title>
     <link rel="icon" type="image/png" href="assets/icon.png">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap');
 
         :root {
-            --primary: #1E3A8A;
-            --primary-light: #3B82F6;
-            --accent: #00f2fe;
-            --success: #10B981;
-            --bg-light: #f8fafc;
-            --text-dark: #1e293b;
-            --text-muted: #64748b;
-            --white: #ffffff;
-            --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            --bg-deep: #0a0f1e;
+            --brand-cyan: #00f2fe;
+            --brand-blue: #4facfe;
+            --text-main: #e2e8f0;
+            --text-dim: #94a3b8;
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.1);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
             font-family: 'Outfit', sans-serif;
-            line-height: 1.6;
-            color: var(--text-dark);
-            background-color: var(--bg-light);
-            -webkit-font-smoothing: antialiased;
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            background-image: radial-gradient(circle at 50% 0%, rgba(79, 172, 254, 0.15) 0%, transparent 50%);
         }
 
         /* Navigation */
         nav {
-            background: var(--white);
-            padding: 1rem 5%;
+            padding: 1.5rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            backdrop-filter: blur(10px);
             position: sticky;
             top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            z-index: 100;
+            border-bottom: 1px solid var(--glass-border);
         }
 
         .nav-logo {
-            height: 40px;
+            height: 32px;
+            filter: drop-shadow(0 0 10px rgba(0, 242, 254, 0.3));
         }
 
-        .back-link {
+        .back-btn {
+            color: var(--text-dim);
             text-decoration: none;
-            color: var(--primary);
-            font-weight: 500;
             font-size: 0.9rem;
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            transition: color 0.3s;
+            transition: color 0.3s ease;
         }
 
-        .back-link:hover {
-            color: var(--primary-light);
+        .back-btn:hover {
+            color: var(--brand-cyan);
         }
 
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, #f0f7ff 0%, #ffffff 100%);
-            padding: 4rem 5%;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .hero-content h1 {
-            font-size: 3rem;
-            line-height: 1.1;
-            color: var(--primary);
-            margin-bottom: 1.5rem;
-            font-weight: 700;
-        }
-
-        .hero-content p {
-            font-size: 1.2rem;
-            color: var(--text-muted);
-            margin-bottom: 2rem;
-        }
-
-        .price-badge {
-            background: rgba(0, 242, 254, 0.1);
-            color: var(--primary);
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            font-weight: 600;
-            display: inline-block;
-            margin-bottom: 1.5rem;
-        }
-
-        .product-image {
-            position: relative;
-        }
-
-        .product-image img {
-            width: 100%;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-        }
-
-        /* CTA Button */
-        .cta-btn {
-            background: var(--success);
-            color: var(--white);
-            text-decoration: none;
-            padding: 1rem 2.5rem;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.75rem;
-            box-shadow: 0 10px 20px rgba(16, 185, 129, 0.2);
-            transition: all 0.3s;
-        }
-
-        .cta-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 30px rgba(16, 185, 129, 0.3);
-            background: #0ea672;
-        }
-
-        /* Features Section */
-        .features {
-            padding: 5rem 5%;
+        /* Main Content */
+        .container {
             max-width: 1200px;
             margin: 0 auto;
+            padding: 2rem;
+            flex: 1;
+        }
+
+        /* Hero / Narrative Section */
+        .breathing-hook {
             text-align: center;
+            margin-bottom: 4rem;
+            animation: fadeIn 1s ease-out;
         }
 
-        .section-title {
-            font-size: 2.2rem;
-            color: var(--primary);
-            margin-bottom: 3rem;
-            font-weight: 600;
-        }
-
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-
-        .feature-card {
-            background: var(--white);
-            padding: 2.5rem;
-            border-radius: 20px;
-            box-shadow: var(--card-shadow);
-            transition: transform 0.3s;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .feature-icon {
+        .breathing-hook h1 {
             font-size: 2.5rem;
+            background: linear-gradient(90deg, var(--brand-cyan), var(--brand-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             margin-bottom: 1.5rem;
-            display: block;
+            letter-spacing: -0.02em;
         }
 
-        .feature-card h3 {
-            margin-bottom: 1rem;
-            color: var(--primary);
-        }
-
-        /* Usage Section */
-        .usage {
-            background: var(--primary);
-            color: var(--white);
-            padding: 5rem 5%;
-        }
-
-        .usage-container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .usage-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 3rem;
-            margin-top: 3rem;
-        }
-
-        .usage-item h4 {
-            font-size: 1.4rem;
-            margin-bottom: 1rem;
-            color: var(--accent);
-        }
-
-        /* Disclaimer */
-        .disclaimer {
-            padding: 3rem 5%;
-            max-width: 1000px;
-            margin: 0 auto;
-            text-align: center;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
-
-        /* Footer */
-        footer {
-            background: #0a192f;
-            color: rgba(255, 255, 255, 0.8);
-            padding: 4rem 5%;
-            text-align: center;
-        }
-
-        .footer-content {
+        .breathing-hook p {
+            font-size: 1.1rem;
+            color: var(--text-dim);
+            line-height: 1.8;
             max-width: 800px;
             margin: 0 auto;
         }
 
-        .footer-brand {
+        .product-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+            margin-bottom: 6rem;
+        }
+
+        /* Gallery */
+        .gallery-container {
+            position: sticky;
+            top: 100px;
+        }
+
+        .main-img-wrapper {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            aspect-ratio: 1;
+            overflow: hidden;
+            backdrop-filter: blur(5px);
+        }
+
+        .main-img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: transform 0.5s ease;
+        }
+
+        .thumb-grid {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .thumb {
+            width: 80px;
+            height: 80px;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .thumb.active {
+            border-color: var(--brand-cyan);
+            background: rgba(0, 242, 254, 0.05);
+        }
+
+        /* Product Info */
+        .product-info h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .product-info .tagline {
+            color: var(--brand-cyan);
+            text-transform: uppercase;
+            letter-spacing: 0.2rem;
+            font-size: 0.8rem;
             margin-bottom: 2rem;
-            opacity: 0.9;
+            display: block;
         }
 
-        .footer-info {
+        .description {
+            color: var(--text-dim);
+            line-height: 1.7;
+            margin-bottom: 2.5rem;
+        }
+
+        /* Toggles */
+        .variant-selector {
+            margin-bottom: 2.5rem;
+        }
+
+        .variant-label {
+            display: block;
+            margin-bottom: 1rem;
             font-size: 0.9rem;
-            line-height: 2;
+            color: var(--text-dim);
         }
 
+        .toggle-group {
+            display: flex;
+            background: var(--glass);
+            padding: 0.4rem;
+            border-radius: 16px;
+            border: 1px solid var(--glass-border);
+            gap: 0.4rem;
+            width: max-content;
+        }
+
+        .toggle-btn {
+            padding: 0.8rem 1.5rem;
+            border-radius: 12px;
+            border: none;
+            background: transparent;
+            color: var(--text-dim);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            font-weight: 600;
+        }
+
+        .toggle-btn.active {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-main);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .price-row {
+            margin-bottom: 2.5rem;
+            display: flex;
+            align-items: baseline;
+            gap: 1rem;
+        }
+
+        .price {
+            font-size: 2.5rem;
+            font-weight: 600;
+        }
+
+        .mrp {
+            color: var(--text-dim);
+            text-decoration: line-through;
+            font-size: 1.1rem;
+        }
+
+        .buy-now {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            background: linear-gradient(90deg, var(--brand-cyan), var(--brand-blue));
+            color: #000;
+            text-decoration: none;
+            padding: 1.2rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 242, 254, 0.3);
+        }
+
+        .buy-now:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 242, 254, 0.4);
+        }
+
+        .buy-now svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* Usage Section */
+        .usage-section {
+            border-top: 1px solid var(--glass-border);
+            padding-top: 6rem;
+            text-align: center;
+        }
+
+        .usage-section h3 {
+            font-size: 1.8rem;
+            margin-bottom: 3rem;
+        }
+
+        .usage-img-container {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 32px;
+            padding: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+            backdrop-filter: blur(5px);
+        }
+
+        .usage-img {
+            width: 100%;
+            height: auto;
+            border-radius: 16px;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 4rem 2rem;
+            text-align: center;
+            border-top: 1px solid var(--glass-border);
+            color: var(--text-dim);
+            font-size: 0.8rem;
+        }
+
+        .footer p {
+            margin-bottom: 1rem;
+            letter-spacing: 0.1rem;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
         @media (max-width: 900px) {
-            .hero {
+            .product-grid {
                 grid-template-columns: 1fr;
-                text-align: center;
-                padding-top: 2rem;
+                gap: 2rem;
             }
 
-            .hero-content h1 {
-                font-size: 2.5rem;
+            .gallery-container {
+                position: relative;
+                top: 0;
             }
 
-            .cta-btn {
-                justify-content: center;
-                width: 100%;
+            .breathing-hook h1 {
+                font-size: 2rem;
             }
         }
     </style>
@@ -258,95 +346,152 @@
 
 <body>
     <nav>
-        <a href="index.html" class="nav-logo-link">
+        <a href="index.html">
             <img src="assets/logo.png" alt="Alhazen Labs" class="nav-logo">
         </a>
-        <a href="index.html" class="back-link">
-            ← Home
+        <a href="index.html" class="back-btn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <line x1="19" y1="12" x2="5" y2="12"></line>
+                <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+            BACK TO HOME
         </a>
     </nav>
 
-    <main>
-        <section class="hero">
-            <div class="hero-content">
-                <span class="price-badge">Premium Care | 30 Strips</span>
-                <h1>Open Your World to Better Breathing</h1>
-                <p>Alhazen Labs Nasal Strips provide gentle, mechanical support to open your nasal passages, helping you
-                    breathe more clearly every single day.</p>
-                <div style="font-size: 1.5rem; font-weight: 700; margin-bottom: 2rem; color: var(--primary);">₹299 <span
-                        style="font-size: 0.9rem; font-weight: 400; color: var(--text-muted);">MRP (Incl. All
-                        Taxes)</span></div>
-                <a href="https://wa.me/919876543210?text=Hi, I want to order Alhazen Nose Strips" class="cta-btn">
-                    Order via WhatsApp
+    <div class="container">
+        <section class="breathing-hook">
+            <h1>The Power of Breathing</h1>
+            <p>
+                Breathing is fundamental to life. But rapid urbanization, climate change, and pollution are worsening
+                air quality and AQI, impairing your breathing and causing fatigue, weakened focus, and poor sleep.
+                <br><br>
+                <strong>Introducing Engineering Nasal Strips</strong>
+                <br>
+                Gently lift nasal passages for better airflow. Experience improved energy, performance, and restful
+                sleep.
+            </p>
+        </section>
+
+        <section class="product-grid">
+            <div class="gallery-container">
+                <div class="main-img-wrapper">
+                    <img src="assets/pack10_1.png" alt="Nasal Strips" class="main-img" id="main-product-img">
+                </div>
+                <div class="thumb-grid" id="thumb-grid">
+                    <div class="thumb active" onclick="updateImage(0)">
+                        <img src="assets/pack10_1.png" alt="Angle 1">
+                    </div>
+                    <div class="thumb" onclick="updateImage(1)">
+                        <img src="assets/pack10_2.png" alt="Angle 2">
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-info">
+                <span class="tagline">Engineered Performance</span>
+                <h2>Breathing Nasal Strips</h2>
+                <p class="description">
+                    Unlock your true potential with every breath. Our nasal strips are designed to provide gentle,
+                    mechanical support to open your nasal passages, reducing resistance and maximizing oxygen intake
+                    whether you're sleeping, working, or training.
+                </p>
+
+                <div class="variant-selector">
+                    <span class="variant-label">SELECT PACK SIZE</span>
+                    <div class="toggle-group">
+                        <button class="toggle-btn active" id="btn-10" onclick="setVariant(10)">Pack of 10</button>
+                        <button class="toggle-btn" id="btn-30" onclick="setVariant(30)">Pack of 30</button>
+                    </div>
+                </div>
+
+                <div class="price-row">
+                    <span class="price" id="display-price">₹279</span>
+                    <span class="mrp" id="display-mrp">₹499</span>
+                </div>
+
+                <a href="https://www.meesho.com/alhazen-labs-breathing-nasal-strips-pack-of-10/p/cfdwzs" target="_blank"
+                    class="buy-now" id="meesho-link">
+                    Buy on Meesho
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                        <polyline points="15 3 21 3 21 9"></polyline>
+                        <line x1="10" y1="14" x2="21" y2="3"></line>
+                    </svg>
                 </a>
             </div>
-            <div class="product-image">
-                <img src="assets/strips_thumb.jpg" alt="Alhazen Nasal Strips">
-            </div>
         </section>
 
-        <section class="features">
-            <h2 class="section-title">Why Choose Alhazen?</h2>
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <span class="feature-icon">✨</span>
-                    <h3>Perfect Tension</h3>
-                    <p>Designed with balanced firmness to open nasal passages without unnecessary pressure.</p>
-                </div>
-                <div class="feature-card">
-                    <span class="feature-icon">🌙</span>
-                    <h3>Secure 12h Grip</h3>
-                    <p>Premium medical-grade adhesive that stays secure through sleep or intense physical activity.</p>
-                </div>
-                <div class="feature-card">
-                    <span class="feature-icon">🌿</span>
-                    <h3>Eco-Conscious</h3>
-                    <p>Packaged in sustainable kraft material with a resealable zipper for on-the-go convenience.</p>
-                </div>
+        <section class="usage-section">
+            <h3>How to Use</h3>
+            <div class="usage-img-container">
+                <img src="assets/usage.png" alt="Usage Instructions" class="usage-img">
             </div>
         </section>
+    </div>
 
-        <section class="usage">
-            <div class="usage-container">
-                <h2 class="section-title" style="color: white; margin-bottom: 1rem;">Engineered for Performance</h2>
-                <p style="text-align: center; opacity: 0.8; margin-bottom: 4rem;">One strip, multiple possibilities.</p>
-                <div class="usage-grid">
-                    <div class="usage-item">
-                        <h4>Deep Sleep</h4>
-                        <p>Reduces nasal resistance to support quiet, unobstructed breathing throughout the night.</p>
-                    </div>
-                    <div class="usage-item">
-                        <h4>Peak Performance</h4>
-                        <p>Perfect for athletes looking to improve nasal airflow during workouts and endurance runs.</p>
-                    </div>
-                    <div class="usage-item">
-                        <h4>Everyday Relief</h4>
-                        <p>Lightweight and comfortable enough for all-day wear during travel or work.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="disclaimer">
-            <p><strong>Medical Disclaimer:</strong> This product provides mechanical support only and is not intended to
-                diagnose, treat, cure, or prevent any medical condition. For external use only. If you have chronic
-                breathing issues, please consult your healthcare provider.</p>
-        </section>
-    </main>
-
-    <footer>
-        <div class="footer-content">
-            <div class="footer-brand">
-                <img src="assets/logo.png" alt="Alhazen Labs" style="height: 40px; filter: brightness(0) invert(1);">
-            </div>
-            <div class="footer-info">
-                Imported & Marketed by: <strong>Kashif Bilal Ali, Prop. Alhazen Labs</strong><br>
-                Bengaluru, Karnataka | GSTIN: 29CEIRPXXXXX1Z5<br>
-                <a href="mailto:hello@alhazenlabs.com"
-                    style="color: var(--accent); text-decoration: none;">hello@alhazenlabs.com</a>
-            </div>
-        </div>
+    <footer class="footer">
+        <p>&copy; 2026 ALHAZEN LABS. ALL RIGHTS RESERVED.</p>
+        <p>Innovative products for better living.</p>
     </footer>
+
+    <script>
+        const productData = {
+            10: {
+                price: "₹279",
+                mrp: "₹499",
+                link: "https://www.meesho.com/alhazen-labs-breathing-nasal-strips-pack-of-10/p/cfdwzs",
+                images: ["assets/pack10_1.png", "assets/pack10_2.png"]
+            },
+            30: {
+                price: "₹499",
+                mrp: "₹899",
+                link: "https://www.meesho.com/alhazen-labs-breathing-nasal-strips-pack-of-30/p/cflajz",
+                images: ["assets/pack30_1.png", "assets/pack30_2.png"]
+            }
+        };
+
+        let currentVariant = 10;
+        let currentImgIdx = 0;
+
+        function setVariant(v) {
+            currentVariant = v;
+            currentImgIdx = 0;
+
+            // Update buttons
+            document.getElementById('btn-10').classList.toggle('active', v === 10);
+            document.getElementById('btn-30').classList.toggle('active', v === 30);
+
+            // Update UI
+            document.getElementById('display-price').innerText = productData[v].price;
+            document.getElementById('display-mrp').innerText = productData[v].mrp;
+            document.getElementById('meesho-link').href = productData[v].link;
+
+            // Update main image and thumbs
+            const thumbs = document.getElementById('thumb-grid').querySelectorAll('.thumb');
+            productData[v].images.forEach((src, idx) => {
+                thumbs[idx].querySelector('img').src = src;
+            });
+            updateImage(0);
+        }
+
+        function updateImage(idx) {
+            currentImgIdx = idx;
+            const mainImg = document.getElementById('main-product-img');
+            mainImg.style.opacity = '0';
+
+            setTimeout(() => {
+                mainImg.src = productData[currentVariant].images[idx];
+                mainImg.style.opacity = '1';
+            }, 200);
+
+            const thumbs = document.getElementById('thumb-grid').querySelectorAll('.thumb');
+            thumbs.forEach((t, i) => {
+                t.classList.toggle('active', i === idx);
+            });
+        }
+    </script>
 </body>
 
 </html>
