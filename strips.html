@@ -19,6 +19,10 @@
             --glass-border: rgba(255, 255, 255, 0.1);
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -50,12 +54,32 @@
             border-bottom: 1px solid var(--glass-border);
         }
 
-        .nav-logo {
-            height: 32px;
-            filter: drop-shadow(0 0 10px rgba(0, 242, 254, 0.3));
+        .nav-logo-wrapper {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.2);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
         }
 
-        .back-btn {
+        .nav-logo-wrapper:hover {
+            box-shadow: 0 0 25px rgba(0, 242, 254, 0.4);
+            background: rgba(255, 255, 255, 0.1);
+            transform: scale(1.05);
+        }
+
+        .nav-logo {
+            height: 24px;
+            filter: drop-shadow(0 0 8px rgba(0, 242, 254, 0.4));
+        }
+
+        .back-btn,
+        .usage-link {
             color: var(--text-dim);
             text-decoration: none;
             font-size: 0.9rem;
@@ -65,8 +89,15 @@
             transition: color 0.3s ease;
         }
 
-        .back-btn:hover {
+        .back-btn:hover,
+        .usage-link:hover {
             color: var(--brand-cyan);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
         }
 
         /* Main Content */
@@ -346,17 +377,22 @@
 
 <body>
     <nav>
-        <a href="index.html">
-            <img src="assets/logo.png" alt="Alhazen Labs" class="nav-logo">
+        <a href="index.html" class="nav-logo-link">
+            <div class="nav-logo-wrapper">
+                <img src="assets/icon.png" alt="Alhazen Labs" class="nav-logo">
+            </div>
         </a>
-        <a href="index.html" class="back-btn">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round">
-                <line x1="19" y1="12" x2="5" y2="12"></line>
-                <polyline points="12 19 5 12 12 5"></polyline>
-            </svg>
-            BACK TO HOME
-        </a>
+        <div class="nav-links">
+            <a href="#usage-section" class="usage-link">USAGE</a>
+            <a href="index.html" class="back-btn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+                HOME
+            </a>
+        </div>
     </nav>
 
     <div class="container">
@@ -366,7 +402,7 @@
                 Breathing is fundamental to life. But rapid urbanization, climate change, and pollution are worsening
                 air quality and AQI, impairing your breathing and causing fatigue, weakened focus, and poor sleep.
                 <br><br>
-                <strong>Introducing Engineering Nasal Strips</strong>
+                <strong>Introducing Breathing Nasal Strips</strong>
                 <br>
                 Gently lift nasal passages for better airflow. Experience improved energy, performance, and restful
                 sleep.
@@ -423,7 +459,7 @@
             </div>
         </section>
 
-        <section class="usage-section">
+        <section class="usage-section" id="usage-section">
             <h3>How to Use</h3>
             <div class="usage-img-container">
                 <img src="assets/usage.png" alt="Usage Instructions" class="usage-img">
