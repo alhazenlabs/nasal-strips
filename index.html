@@ -270,15 +270,36 @@
             line-height: 1.4;
         }
 
-        .close-hint {
+        .close-modal {
             position: absolute;
-            bottom: 3rem;
+            top: 2rem;
+            right: 2rem;
+            width: 44px;
+            height: 44px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
             color: var(--text-dim);
-            font-size: 0.8rem;
-            letter-spacing: 0.2rem;
-            text-transform: uppercase;
-            opacity: 0.5;
-            pointer-events: none;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            z-index: 2200;
+        }
+
+        .close-modal:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: var(--brand-cyan);
+            color: var(--brand-cyan);
+            transform: scale(1.1) rotate(90deg);
+            box-shadow: 0 0 20px rgba(0, 242, 254, 0.2);
+        }
+
+        .close-modal svg {
+            width: 20px;
+            height: 20px;
         }
 
         @media (max-width: 600px) {
@@ -358,7 +379,13 @@
                 <p>Coming soon</p>
             </div>
         </div>
-        <div class="close-hint">Click anywhere to close</div>
+        <button class="close-modal" id="close-modal" aria-label="Close modal">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </button>
     </div>
 
 
@@ -369,6 +396,7 @@
     <script>
         const openBtn = document.getElementById('open-slider');
         const modal = document.getElementById('product-modal');
+        const closeBtn = document.getElementById('close-modal');
         const logoWrapper = document.getElementById('logo-wrapper');
         const mainLogo = document.getElementById('main-logo');
 
@@ -436,6 +464,11 @@
         openBtn.addEventListener('click', (e) => {
             e.preventDefault();
             modal.classList.add('active');
+        });
+
+        closeBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            modal.classList.remove('active');
         });
 
         modal.addEventListener('click', (e) => {
