@@ -402,7 +402,6 @@
 
         // --- Logo Motion Logic ---
         let isHoveringLogo = false;
-        let hasOrientationData = false;
 
         mainLogo.addEventListener('mouseenter', () => {
             isHoveringLogo = true;
@@ -421,44 +420,12 @@
 
         // PC: Mouse Tracking
         document.addEventListener('mousemove', (e) => {
-            // Only use mouse if we haven't received significant orientation data recently
-            if (window.innerWidth > 768 && !hasOrientationData) {
+            if (window.innerWidth > 768) {
                 const xAxis = (window.innerWidth / 2 - e.pageX) / 40;
                 const yAxis = (window.innerHeight / 2 - e.pageY) / 40;
                 updateLogoTransform(yAxis, xAxis);
             }
         });
-
-        // Mobile/Sensors: Device Orientation
-        function handleOrientation(event) {
-            if (event.gamma !== null) {
-                hasOrientationData = true;
-                const gamma = event.gamma;
-                const rotY = Math.max(-15, Math.min(15, gamma)) * 0.4;
-                updateLogoTransform(0, rotY);
-            }
-        }
-
-        // Request permission for iOS 13+
-        function requestOrientationPermission() {
-            if (typeof DeviceOrientationEvent.requestPermission === 'function') {
-                DeviceOrientationEvent.requestPermission()
-                    .then(permissionState => {
-                        if (permissionState === 'granted') {
-                            window.addEventListener('deviceorientation', handleOrientation);
-                        }
-                    })
-                    .catch(console.error);
-            } else {
-                // Non-iOS devices
-                window.addEventListener('deviceorientation', handleOrientation);
-            }
-        }
-
-        // Initialize orientation tracking on first interaction if needed
-        document.body.addEventListener('click', () => {
-            requestOrientationPermission();
-        }, { once: true });
 
         // --- Slider Logic ---
         openBtn.addEventListener('click', (e) => {
